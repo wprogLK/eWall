@@ -1,6 +1,6 @@
 package models;
 
-public enum MediaType 
+public enum MediaType
 {
 	PICTURE,
 	TEXT,

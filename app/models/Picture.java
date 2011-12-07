@@ -2,8 +2,7 @@ package models;
 
 import javax.persistence.Entity;
 
-@Entity
-public class Picture<T> extends Media implements IMedia
+public class Picture <T> extends Media
 {
 
 	public Picture(String name, String url, int height, int width) 

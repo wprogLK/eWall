@@ -11,7 +11,7 @@ public class Bootstrap extends Job
 	public void doJob()
 	{
 		User user = new User("Bob","bob");
-	//	user.save();
+		user.save();
 		
 		User defaultUser = new User("Default","Default"); 	//The default user (if no user is logged in)
 		Wall defaultWall=defaultUser.getWall();
@@ -20,14 +20,14 @@ public class Bootstrap extends Job
 		
 		defaultWall.add(text);
 		Media m=(Media) defaultWall.getIterator().next();
-		try
-		{
-			Picture w=m.toT();
-		}
-		catch(ClassCastException e)
-		{
-			System.out.println("FEHLER");
-		}
+//		try
+//		{
+//			Text t=m.toT();
+//		}
+//		catch(ClassCastException e)
+//		{
+//			System.out.println("FEHLER");
+//		}
 		
 	}
 }

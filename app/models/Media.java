@@ -1,32 +1,34 @@
 package models;
 
+import javax.persistence.Entity;
+
 import play.db.jpa.Model;
 
+@Entity
 public abstract class Media extends Model
 {
-	private final int DEFAULT_HEIGHT = 500;
-	private final int DEFAULT_WIDTH = 500;
+	public final int DEFAULT_HEIGHT = 500;
+	public final int DEFAULT_WIDTH = 500;
 	
-	private final int HEIGHT_PER_CLICK = 100;
-	private final int WIDTH_PER_CLICK = 100;
+	public final int HEIGHT_PER_CLICK = 100;
+	public final int WIDTH_PER_CLICK = 100;
 	
-	private final int MAX_HEIGHT=2000;
-	private final int MAX_WIDTH=2000;
+	public final int MAX_HEIGHT=2000;
+	public final int MAX_WIDTH=2000;
 	
-	private final int DEFAULT_CLICK_COUNTER=0;
 	
-	private int height = DEFAULT_HEIGHT;
-	private int width = DEFAULT_WIDTH;
+	public int height = DEFAULT_HEIGHT;
+	public int width = DEFAULT_WIDTH;
 	
-	private String name;
-	private MediaType type;
+	public String name;
+	public MediaType type;
 	
 	
 //	protected boolean isPicture=false;
 //	protected boolean isText=false;
 //	protected boolean isWall=false;
 	
-	private int clickCounter=DEFAULT_CLICK_COUNTER;
+	public int clickCounter;//=DEFAULT_CLICK_COUNTER;
 	
 	public Media(String name, MediaType type)
 	{
@@ -35,6 +37,7 @@ public abstract class Media extends Model
 		
 		this.height = DEFAULT_HEIGHT;
 		this.width = DEFAULT_WIDTH;
+		this.clickCounter=0;
 	}
 	
 	public Media(String name, int height, int width, MediaType type)
@@ -44,6 +47,8 @@ public abstract class Media extends Model
 		
 		this.height = height;
 		this.width = width;
+		
+		this.clickCounter=0;
 	}
 
 		
