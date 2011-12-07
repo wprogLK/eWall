@@ -1,6 +1,10 @@
 package bootstrap;
 
 
+import java.security.Security;
+
+import controllers.Secure;
+
 import models.*;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
@@ -15,19 +19,18 @@ public class Bootstrap extends Job
 		
 		User defaultUser = new User("Default","Default"); 	//The default user (if no user is logged in)
 		Wall defaultWall=defaultUser.getWall();
-		
 		Text text=new Text("Test","Hello world! \n new line");
 		
 		defaultWall.add(text);
 		Media m=(Media) defaultWall.getIterator().next();
-//		try
-//		{
-//			Text t=m.toT();
-//		}
-//		catch(ClassCastException e)
-//		{
-//			System.out.println("FEHLER");
-//		}
+		try
+		{
+			Text t=m.toT();
+		}
+		catch(ClassCastException e)
+		{
+			System.out.println("FEHLER");
+		}
 		
 	}
 }
