@@ -16,4 +16,21 @@ public class Wall extends Media
 		this.name = name;
 		this.owner = owner;
 	}
+
+	@Override
+	public void saveAll() 
+	{
+		this.save();
+		this.owner.save();
+	}
+	
+	public String getName()
+	{
+		return this.name;
+	}
+	
+	public User getOwner()
+	{
+		return this.owner;
+	}
 }
