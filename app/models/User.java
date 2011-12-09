@@ -33,6 +33,11 @@ public class User extends Model implements IModel
 		this.saveAll();
 	}
 	
+	public String getUsername()
+	{
+		return this.username;
+	}
+	
 	public Wall getWall()
 	{
 		//TODO

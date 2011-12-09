@@ -1,4 +1,8 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+Hello ${user.getUsername()}
+<br>
+Your current wall is: ${user.getWall().getName()}
+</br>
+A media is: ${user.getWall().getMedia().getTitle()}

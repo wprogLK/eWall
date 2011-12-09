@@ -16,7 +16,7 @@ public class Wall extends Media
 	@ManyToOne
 	private User owner;
 
-	@ManyToMany(cascade=CascadeType.ALL)//(mappedBy = "id", cascade = CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL)
 	private List<Media> medias;
 	
 	public Wall(String name, User owner) 
@@ -34,6 +34,11 @@ public class Wall extends Media
 	{
 		this.save();
 		this.owner.save();
+		
+		for(Media m:this.medias)
+		{
+			m.save();
+		}
 	}
 	
 	public String getName()
@@ -49,6 +54,7 @@ public class Wall extends Media
 	public void addMedia(Media mediaToAdd)
 	{
 		this.medias.add(mediaToAdd);
+		this.saveAll();
 	}
 	
 	public Media getMedia()
