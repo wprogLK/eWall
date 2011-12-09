@@ -16,7 +16,7 @@ public class Wall extends Media
 	@ManyToOne
 	private User owner;
 
-	@ManyToMany(mappedBy = "id", cascade = CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL)//(mappedBy = "id", cascade = CascadeType.ALL)
 	private List<Media> medias;
 	
 	public Wall(String name, User owner) 

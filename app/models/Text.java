@@ -11,9 +11,6 @@ import javax.persistence.ManyToMany;
 public class Text extends Media
 {
 	
-	@ManyToMany
-	@Id
-	private int id;
 	private String title;
 	
 	public Text(String title)
