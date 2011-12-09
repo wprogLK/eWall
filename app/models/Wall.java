@@ -1,7 +1,13 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Wall extends Media
@@ -10,11 +16,17 @@ public class Wall extends Media
 	@ManyToOne
 	private User owner;
 
+	@ManyToMany(mappedBy = "id", cascade = CascadeType.ALL)
+	private List<Media> medias;
+	
 	public Wall(String name, User owner) 
 	{
 		super();
+		
 		this.name = name;
 		this.owner = owner;
+		
+		this.medias = new ArrayList<Media>();
 	}
 
 	@Override
@@ -32,5 +44,16 @@ public class Wall extends Media
 	public User getOwner()
 	{
 		return this.owner;
+	}
+	
+	public void addMedia(Media mediaToAdd)
+	{
+		this.medias.add(mediaToAdd);
+	}
+	
+	public Media getMedia()
+	{
+		//TODO
+		return this.medias.get(0);
 	}
 }

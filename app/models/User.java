@@ -35,6 +35,7 @@ public class User extends Model implements IModel
 	
 	public Wall getWall()
 	{
+		//TODO
 		return this.walls.get(0);
 	}
 	
