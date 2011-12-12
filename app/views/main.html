@@ -10,7 +10,14 @@
         <script src="@{'/public/javascripts/jquery-1.5.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         #{get 'moreScripts' /}
     </head>
+   
+ 	#{include 'navigation.html' /}
+ 	
     <body>
         #{doLayout /}
     </body>
+    
+   #{include 'footer.html' /}
+    
+    
 </html>
