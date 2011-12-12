@@ -3,6 +3,9 @@
 
 Hello ${user.getUsername()}
 <br>
-Your current wall is: ${user.getWall().getName()}
+Your current wall is: ${user.nextWall().getName()}
+
+Your next wall is: ${user.nextWall().getName()}
+Your next next wall is: ${user.nextWall().getName()}
 </br>
-A media is: ${user.getWall().getMedia().getTitle()}
+A media is: ${user.getWall(0).getMedia().getTitle()}
