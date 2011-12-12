@@ -51,14 +51,25 @@ public class User extends Model implements IModel
 		return this.walls.get(this.indexOfCurrentWall);
 	}
 	
-	public Wall getWall(int i)
+	public Wall getWall(int index)
 	{
-		return this.walls.get(i);
+		return this.walls.get(index);
 	}
+	
+	public boolean hasNext()
+	{
+		return (this.walls.size()-1==this.indexOfCurrentWall);
+	}
+	
+	public List<Wall> getAll()
+	{
+		return this.walls;
+	}
+	
 
 	private void nextIndexOfWall()
 	{
-		if(this.walls.size()-1 == this.indexOfCurrentWall)
+		if(this.hasNext())
 		{
 			this.indexOfCurrentWall = 0;
 			//TODO Maybem throw a "message"

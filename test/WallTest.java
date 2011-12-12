@@ -25,7 +25,7 @@ public class WallTest extends UnitTest{
 	public void simpleWallTest() 
 	{	
 		User user = User.find("byUsername", "tester").first();
-		Wall wall = user.getWall();
+		Wall wall = user.getWall(0);
 		assertEquals(wall.getOwner(),user);
 		assertEquals(wall.getName(),"defaultWall");
 	}
@@ -34,7 +34,7 @@ public class WallTest extends UnitTest{
 	public void addMediaToWall() 
 	{	
 		User user = User.find("byUsername", "tester").first();
-		Wall wall = user.getWall();
+		Wall wall = user.getWall(0);
 		
 		Text text = new Text("TestText");
 		

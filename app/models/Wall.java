@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 public class Wall extends Media
 {
 	private String name;
+	private int indexOfCurrentMedia = -1;
 	@ManyToOne
 	private User owner;
 
@@ -49,6 +50,40 @@ public class Wall extends Media
 	public User getOwner()
 	{
 		return this.owner;
+	}
+	
+	public Media nextMedia()
+	{
+		this.nextIndexOfWall();
+		return this.medias.get(this.indexOfCurrentMedia);
+	}
+
+	public Media getMedia(int index)
+	{
+		return this.medias.get(index);
+	}
+	
+	public boolean hasNext()
+	{
+		return (this.medias.size()-1==this.indexOfCurrentMedia);
+	}
+	
+	private void nextIndexOfWall()
+	{
+		if(this.hasNext())
+		{
+			this.indexOfCurrentMedia = 0;
+			//TODO Maybem throw a "message"
+		}
+		else
+		{
+			this.indexOfCurrentMedia++;
+		}
+	}
+	
+	public List<Media> getAll()
+	{
+		return this.medias;
 	}
 	
 	public void addMedia(Media mediaToAdd)
