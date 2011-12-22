@@ -11,6 +11,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import controllers.Secure;
+import controllers.Secure.Security;
+
 import play.db.jpa.Model;
 
 @Entity
@@ -24,8 +27,6 @@ public class User extends Model implements IModel
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	private List<Wall> walls;
 	
-	
-	
 	public User(String username, String password)
 	{
 		this.username = username;
@@ -35,8 +36,7 @@ public class User extends Model implements IModel
 		
 		Wall wall = new Wall("defaultWall",this);
 		this.walls.add(wall);
-		
-		
+	
 		this.saveAll();
 	}
 	
@@ -102,5 +102,10 @@ public class User extends Model implements IModel
 		{
 			w.save();
 		}
+	}
+	
+	public boolean checkPassword(String passwordIn)
+	{
+		return this.password.equals(passwordIn);
 	}
 }

@@ -2,3 +2,8 @@
 #{set title:'Home' /}
 Hallo
 
+#{if flash.error}
+    <p style="color:#c00">
+        ${flash.error}
+    </p>
+#{/if}
