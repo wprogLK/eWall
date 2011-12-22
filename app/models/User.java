@@ -14,12 +14,17 @@ import javax.persistence.OneToMany;
 import controllers.Secure;
 import controllers.Secure.Security;
 
+import play.data.validation.Check;
+import play.data.validation.CheckWith;
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
 @Entity
 public class User extends Model implements IModel
 {
 	private String username;
+	@Required
+	@CheckWith(PasswordCheck.class)
 	private String password;
 	
 	private int indexOfCurrentWall = -1;
@@ -107,5 +112,17 @@ public class User extends Model implements IModel
 	public boolean checkPassword(String passwordIn)
 	{
 		return this.password.equals(passwordIn);
+	}
+	
+	static class PasswordCheck extends Check
+	{
+
+		@Override
+		public boolean isSatisfied(Object validatedObject, Object value) {
+			setMessage("SORRY WRONG PASSWORD");
+			System.out.println("WRONG PW");
+			return false;
+		}
+		
 	}
 }

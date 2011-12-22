@@ -33,11 +33,12 @@ public class Security extends Controller
 		
 		if(userToLogin == null)
 		{
-			 validation.required("username",username).message("validation.unknownUser");
-		     validation.required("password",password).message("validation.wrongPassword");
-		     validation.required("userTo",userToLogin).message("validation.unknownUser");
+			String[] arr={"First" , "Second"};
+			validation.addError("MyField", "validation.unknownUser",arr);
+//			 validation.required("username",username).message("validation.unknownUser");
+//		     validation.required("password",password).message("validation.wrongPassword");
+//		     validation.required("userTo",userToLogin).message("validation.unknownUser");
 		     
-		   Error error =   validation.error("field");
 		   
 		     if(validation.hasErrors()) {
 		    	 params.flash(); // add http parameters to the flash scope
@@ -49,23 +50,33 @@ public class Security extends Controller
 			System.out.println("ERROR: " + flash.toString());
 			login();
 		}
-		else if(userToLogin.checkPassword(password))
-		{
-			try 
-			{
-				Secure.authenticate(username, password, remember);
-				Secure.login();
-			} 
-			catch (Throwable e) 
-			{
-				flash.error("Opps, something goes wrong. Sorry for that. <p> The error was: " + e.getMessage() + " </p>");		//TODO
-				params.flash();
-			}
-		}
+//		else if(userToLogin.checkPassword(password))
+//		{
+//			try 
+//			{
+//				Secure.authenticate(username, password, remember);
+//				Secure.login();
+//			} 
+//			catch (Throwable e) 
+//			{
+//				flash.error("Opps, something goes wrong. Sorry for that. <p> The error was: " + e.getMessage() + " </p>");		//TODO
+//				params.flash();
+//			}
+//		}
 		else
 		{
-			flash.error("Wrong password!");
-			params.flash();
+//			flash.error("Wrong password!");
+//			params.flash();
+			validation.required(userToLogin);
+			validation.required("username",username).message("validation.unknownUser");
+		     validation.required("password",password).message("validation.wrongPassword");
+		     validation.required("userTo",userToLogin).message("validation.unknownUser");
+		     		   
+		     if(validation.hasErrors()) {
+		    	 params.flash(); // add http parameters to the flash scope
+		         validation.keep(); // keep the errors for the next request
+		         login();
+		      }
 		}
 		
 		Application.index();

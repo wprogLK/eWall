@@ -20,11 +20,10 @@
        #{if error.getKey().equals("userTo") }
       	 <li>C: ${error.getKey()}</li>
        #{/if}
-        <li>N: ${error.getKey()}</li>
-       ERROR:
-      da:
- 	#{error 'unknownUser' /}
-       ----
+       	ALL:
+        <li>KEY: ${error.getKey()}</li>
+        <li>MESSAGE: ${error.message()}</li>
+       
    #{/errors}
 #{/ifErrors}
 
