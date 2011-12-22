@@ -4,5 +4,5 @@
 
 #ERRORS
 
-validation.unknownUser = The user is unknown! Var1: %2$s 	Var2: %3$s
-validation.wrongPassword = Error: wrong password Var1: %2$s	Var2: %3$s
+validation.unknownUser = The user is unknown!
+validation.wrongPassword = Wrong password!

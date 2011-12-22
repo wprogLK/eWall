@@ -1,29 +1,24 @@
 #{extends 'main.html' /}
+
 #{form @Security.authenticate(), id:'login'}
-	<input type="text" name="username" id="username" value="${flash.name}" />
-	  <span class="error">#{error 'name' /}</span>
-	<input type="password" name="password" id="password" value="${flash.password}" />
-	<input type="checkbox" name="remember" id="remember" value="${flash.remeber}" />
-	<input type="submit" id="signin" value="&{'secure.signin'}" />
+	<label for="username">Username</label>
+	<input type="text" name="username" id="username" />
+	#{ifErrors}
+		#{myErrors errors:errors, searchKey:'unknownUser' /}
+	#{/ifErrors}
+	
+	</br>
+	<label for="password">Password</label>
+	<input type="password" name="password" id="password"/>	
+	
+	#{ifErrors}
+		#{myErrors errors:errors, searchKey:'wrongPassword' /}
+	#{/ifErrors}
+	
+	</br>
+	<label for="remember">remember</label>
+	<input type="checkbox" name="remember" id="remember" />
+	<input type="submit" id="signin" name="login" />
 #{/form}
 
-#{ifErrors}
-   <h1>Oops…</h1>
- 
-   	#{errors}
-		#{if error.getKey().equals("username") }
-      	 <li>A: ${error.getKey()}</li>
-       #{/if}
-       #{if error.getKey().equals("password") }
-      	 <li>B: ${error.getKey()}</li>
-       #{/if}
-       #{if error.getKey().equals("userTo") }
-      	 <li>C: ${error.getKey()}</li>
-       #{/if}
-       	ALL:
-        <li>KEY: ${error.getKey()}</li>
-        <li>MESSAGE: ${error.message()}</li>
-       
-   #{/errors}
-#{/ifErrors}
 

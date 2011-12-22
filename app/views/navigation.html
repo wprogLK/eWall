@@ -1,10 +1,10 @@
 #{stylesheet 'main.css' /}
 
-*{<nav id="mainNavigation"> NAV ${user.getUsername()}</nav>}*
-
-#{if isLoggedIn}
-		<a href = "@{Security.logout()}" > Logout </a>
-#{/if}
-#{else}
-	<a href = "@{Security.login()}" > Login </a>
-#{/else}
+<nav id = "mainNavigation"> 
+	#{if currentUser}
+		<a href="@{Security.logout()}">Logout</a>
+	#{/if}
+	#{else}
+		<a href=@{Security.login()}>Login</a>
+	#{/else}
+</nav>
