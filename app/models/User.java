@@ -107,15 +107,13 @@ public class User extends Model implements IModel
 			w.save();
 		}
 	}
-	
-	public boolean checkPassword(String passwordIn)
+
+	public String getPassword() 
 	{
-		if(!this.password.equals(passwordIn))
-		{
-			Validation.addError("wrongPassword", "validation.wrongPassword");
-			Validation.keep();	
-		}
-		
-		return this.password.equals(passwordIn);
+		return this.password;
 	}
+	
+	
+	
+
 }

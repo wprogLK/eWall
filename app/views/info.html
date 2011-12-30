@@ -1,0 +1,17 @@
+#{stylesheet 'main.css' /}
+
+#{if currentUser}
+	<a href="@{Security.logout()}">Logout</a>
+#{/if}
+#{else}
+	#{ifnot pageTitle.equals("Login")}
+		<a href=@{Security.login()}>Login</a>
+	#{/ifnot}
+	
+	#{ifnot pageTitle.equals("Register")}
+		<a href=@{Security.register()}>Register</a>
+	#{/ifnot}
+
+#{/else}
+
+

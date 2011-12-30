@@ -7,7 +7,7 @@ import play.mvc.*;
 
 import models.*;
 public class Security extends Controller
-{
+{	
 	public static void login()
 	{
 		render();
@@ -34,7 +34,7 @@ public class Security extends Controller
 		
 		if(userToLogin == null)
 		{
-			Validation.addError("unknownUser", "validation.unknownUser");
+			Validation.addError("unknownUser", "security.authenticate.unknownUser");
 			
 			if(validation.hasErrors()) 
 			{
@@ -44,7 +44,7 @@ public class Security extends Controller
 			
 			login();
 		}
-		else if(userToLogin.checkPassword(password))
+		else if(checkPassword(password, userToLogin.getPassword()))
 		{
 			try 
 			{
@@ -69,5 +69,63 @@ public class Security extends Controller
 		}
 	}
 
-
+	public static void register()
+	{
+		render();
+	}
+	
+	public static void doRegister(String username, String password, String confirmPassword, boolean remember)
+	{
+		if(equalsPassword(password, confirmPassword) && usernameAllowed(username) && usernameNotAlreadyExist(username))
+		{
+			new User(username, password);
+			authenticate(username, password, remember);
+		}
+		else
+		{
+			register();
+		}
+	}
+	
+	private static boolean equalsPassword(String password, String confirmPassword)
+	{
+		if(!password.equals(confirmPassword))
+		{
+			Validation.addError("notMatchPassword", "security.register.notMatchPassword");
+			Validation.keep();	
+		}
+		
+		return password.equals(confirmPassword);
+	}
+	
+	private static boolean checkPassword(String passwordInput, String passwordUser)
+	{
+		if(!passwordInput.equals(passwordUser))
+		{
+			Validation.addError("notMatchPassword", "security.authenticate.notMatchPassword");
+			Validation.keep();	
+		}
+		
+		return passwordInput.equals(passwordUser);
+	}
+	
+	private static boolean usernameNotAlreadyExist(String username)
+	{
+		User user = User.find("byUsername", username).first();
+		
+		if(user!=null)
+		{
+			Validation.addError("usernameAlreadyExist", "security.register.usernameAlreadyExist");
+			Validation.keep();	
+		}
+		
+		return user==null;
+	}
+	
+	private static boolean usernameAllowed(String username)
+	{
+		//TODO: do not allowed spaces and usernames with special characters and usernames like admin, Admin, wprog, wprogLK
+		//TODO: implement it
+		return true;
+	}
 }

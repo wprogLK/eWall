@@ -4,5 +4,9 @@
 
 #ERRORS
 
-validation.unknownUser = The user is unknown!
-validation.wrongPassword = Wrong password!
+security.authenticate.unknownUser = The user is unknown!
+security.authenticate.wrongPassword = Wrong password!
+
+security.register.usernameNotAllowed = The username %s is not allowed!
+security.register.usernameAlreadyExist = A user with the username %s already exist! Please choose another one!
+security.register.notMatchPassword = The passwords are not the same!

@@ -2,4 +2,4 @@
 
 require:
     - play
-    - play -> secure
+    - play -> secure.login

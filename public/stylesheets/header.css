@@ -1,0 +1,20 @@
+table#tableHeader
+{
+	border: 0px;
+	width: 100%;
+}
+
+td#title
+{
+	width: 75%;
+}
+
+td#info
+{
+
+}
+
+td#navigation
+{
+	width: 25%;
+}
