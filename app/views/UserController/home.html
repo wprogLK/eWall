@@ -1,0 +1,6 @@
+#{extends 'main.html'/}
+#{set title:'Home' /}
+#{set pageTitle: 'eWall - Home User' /}
+#{if currentUser}
+	Hello ${currentUser.getUsername()} You're  home!
+#{/if}

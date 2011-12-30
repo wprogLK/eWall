@@ -1,11 +1,17 @@
 #{stylesheet 'main.css' /}
 
-<nav id = "mainNavigation"> 
+<nav id = "mainNavigation"> 	
+	#{ifnot pageTitle.equals("eWall")}
+		<a href = @{Application.index()}>StartPage</a>
+	#{/ifnot}
+	
 	#{if currentUser}
-		<a href="@{Security.logout()}">Logout</a>
+		#{ifnot pageTitle.equals("eWall - Home User")}
+			<a href = @{UserController.home()}>Home</a>
+		#{/ifnot}
 	#{/if}
 	#{else}
-		<a href=@{Security.login()}>Login</a>
+		
 	#{/else}
 </nav>
 

@@ -1,11 +1,11 @@
 #{extends 'main.html'/}
 #{set title:'Home' /}
-#{set pageTitle: 'eWall - Home' /}
+#{set pageTitle: 'eWall' /}
 
-#{if user}
-	Hello ${user.getUsername()}
+#{if currentUser}
+	Hello user!
 #{/if}
 #{else}
-	bye
+	[HERE information about this site]
 #{/else}
 
