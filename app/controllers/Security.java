@@ -87,6 +87,13 @@ public class Security extends Controller
 		}
 	}
 	
+	/**
+	 * for registration of a new user
+	 * @param password
+	 * @param confirmPassword
+	 * @return
+	 * @see #checkPassword
+	 */
 	private static boolean equalsPassword(String password, String confirmPassword)
 	{
 		if(!password.equals(confirmPassword))
@@ -98,11 +105,18 @@ public class Security extends Controller
 		return password.equals(confirmPassword);
 	}
 	
+	/**
+	 * for login a user
+	 * @param passwordInput
+	 * @param passwordUser
+	 * @return
+	 * @see #equalsPassword
+	 */
 	private static boolean checkPassword(String passwordInput, String passwordUser)
 	{
 		if(!passwordInput.equals(passwordUser))
 		{
-			Validation.addError("notMatchPassword", "security.authenticate.notMatchPassword");
+			Validation.addError("wrongPassword", "security.authenticate.wrongPassword");
 			Validation.keep();	
 		}
 		
