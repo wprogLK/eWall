@@ -1,30 +1,70 @@
 #{extends 'main.html' /}
 #{set pageTitle: 'Register' /}
+#{stylesheet 'register.css' /}
 
-#{form @Security.doRegister(), id:'register'}
-	<label for="username">Username</label>
-	<input type="text" name="username" id="username" />
-	#{ifErrors}
-		#{myErrors errors:errors, searchKey:'usernameNotAllowed' /}
-		#{myErrors errors:errors, searchKey:'usernameAlreadyExist' /}
-	#{/ifErrors}
+#{form @Security.doRegister()}
+	<table>
+		<tr>
+			<td>
+				<label for="username">Username</label>
+			</td>
+			<td>
+				<input type="text" name="username" id="username" />
+			</td>
+			
+			#{ifErrors}
+				<td>
+					#{myErrors errors:errors, searchKey:'usernameNotAllowed' /}
+					#{myErrors errors:errors, searchKey:'usernameAlreadyExist' /}
+				</td>
+			#{/ifErrors}
+		</tr>
+
+		<tr>
+			<td>
+				<label for="password">Password</label>
+			</td>
+			<td>
+				<input type="password" name="password" id="password"/>	
+			</td>
+			
+			#{ifErrors}
+				<td>
+				
+					#{myErrors errors:errors, searchKey:'notMatchPassword' /}
+				</td>
+			#{/ifErrors}
+		</tr>
+		
+		<tr>
+			<td>
+				<label for="confirmPassword">Confirm your password</label>
+			</td>
+			<td>
+				<input type="password" name="confirmPassword" id="confirmPassword"/>	
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<label for="remember">remember</label>
+			</td>
+			<td>
+				<input type="checkbox" name="remember" id="remember" />
+			</td>
+		</tr>
 	
-	</br>
-	<label for="password">Password</label>
-	<input type="password" name="password" id="password"/>	
+		<tr>
+			<td>
+				
+			</td>
+			<td>
+				<input type="submit" id="registerButton" value="Register" name="register" />
+			</td>
+		</tr>
 	
-	#{ifErrors}
-		#{myErrors errors:errors, searchKey:'notMatchPassword' /}
-	#{/ifErrors}
+	</table>
 	
-	</br>
-	<label for="confirmPassword">Confirm your password</label>
-	<input type="password" name="confirmPassword" id="confirmPassword"/>	
-	
-	</br>
-	<label for="remember">remember</label>
-	<input type="checkbox" name="remember" id="remember" />
-	<input type="submit" id="register" value="Register" name="register" />
 #{/form}
 
 
