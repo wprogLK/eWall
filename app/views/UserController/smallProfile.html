@@ -1,0 +1,19 @@
+#{stylesheet 'smallProfile.css' /}
+
+#{if currentUser}
+	<table>
+		<tr>
+			<td>
+				${currentUser.getUsername()}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				[UserPic here]
+			</td>
+		</tr>
+	</table>
+
+	</br>
+	
+#{/if}

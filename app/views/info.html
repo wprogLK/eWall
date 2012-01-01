@@ -1,17 +1,52 @@
 #{stylesheet 'main.css' /}
-
+<table>
 #{if currentUser}
-	<a href="@{Security.logout()}">Logout</a>
+	<tr>
+		<td>
+			
+		</td>
+		<td>
+			<a href="@{Security.logout()}">Logout</a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			#{include 'UserController/smallProfile.html' /}
+		</td>
+		<td>
+		
+		</td>
+	</tr>
 #{/if}
 #{else}
-	#{ifnot pageTitle.equals("Login")}
-		<a href=@{Security.login()}>Login</a>
-	#{/ifnot}
+	<tr>
+		<td>
+				
+	</td>
+		<td>
+			#{ifnot pageTitle.equals("Login")}
+				<a href=@{Security.login()}>Login</a>
+			#{/ifnot}
+			#{else}
+				Login
+			#{/else}
 	
-	#{ifnot pageTitle.equals("Register")}
-		<a href=@{Security.register()}>Register</a>
-	#{/ifnot}
-
+			#{ifnot pageTitle.equals("Register")}
+				<a href=@{Security.register()}>Register</a>
+			#{/ifnot}
+			#{else}
+				Register
+			#{/else}
+		</td>
+	</tr>
+	<tr>
+		<td>
+				
+		</td>
+		<td>
+		
+		</td>
+	</tr>
 #{/else}
 
-
+</table>

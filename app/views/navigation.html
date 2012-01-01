@@ -4,11 +4,17 @@
 	#{ifnot pageTitle.equals("eWall")}
 		<a href = @{Application.index()}>StartPage</a>
 	#{/ifnot}
+	#{else}
+		StartPage
+	#{/else}
 	
 	#{if currentUser}
 		#{ifnot pageTitle.equals("eWall - Home User")}
 			<a href = @{UserController.home()}>Home</a>
 		#{/ifnot}
+		#{else}
+			Home
+		#{/else}
 	#{/if}
 	#{else}
 		
