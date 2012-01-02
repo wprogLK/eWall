@@ -5,7 +5,7 @@
 		<a href = @{Application.index()}>StartPage</a>
 	#{/ifnot}
 	#{else}
-		StartPage
+		<activeLink>StartPage</activeLink>
 	#{/else}
 	
 	#{if currentUser}
@@ -13,7 +13,7 @@
 			<a href = @{UserController.home()}>Home</a>
 		#{/ifnot}
 		#{else}
-			Home
+			<activeLink>Home</activeLink>
 		#{/else}
 	#{/if}
 	#{else}

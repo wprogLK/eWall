@@ -28,14 +28,14 @@
 				<a href=@{Security.login()}>Login</a>
 			#{/ifnot}
 			#{else}
-				Login
+				<activeLink>Login</activeLink>
 			#{/else}
 	
 			#{ifnot pageTitle.equals("Register")}
 				<a href=@{Security.register()}>Register</a>
 			#{/ifnot}
 			#{else}
-				Register
+				<activeLink>Register</activeLink>
 			#{/else}
 		</td>
 	</tr>
