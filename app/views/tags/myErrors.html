@@ -1,6 +1,6 @@
 #{stylesheet 'myErrors.css' /}
 #{errors}
 	#{if error.getKey().equals(_searchKey)}
-		${error.message()}
+		<error>${error.message()}</error>
 	#{/if}
 #{/errors}

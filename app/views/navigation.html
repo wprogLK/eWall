@@ -1,23 +1,30 @@
 #{stylesheet 'main.css' /}
 
 <nav id = "mainNavigation"> 	
-	#{ifnot pageTitle.equals("eWall")}
-		<a href = @{Application.index()}>StartPage</a>
-	#{/ifnot}
-	#{else}
-		<activeLink>StartPage</activeLink>
-	#{/else}
+
 	
 	#{if currentUser}
+		#{ifnot pageTitle.equals("eWall")}
+			<a href = @{Application.index()}>MainWall</a>
+		#{/ifnot}
+		#{else}
+			<activeLink>MainWall</activeLink>
+		#{/else}
+	
 		#{ifnot pageTitle.equals("eWall - Home User")}
-			<a href = @{UserController.home()}>Home</a>
+			<a href = @{UserController.home()}>Profile</a>
+		#{/ifnot}
+		#{else}
+			<activeLink>Profile</activeLink>
+		#{/else}
+	#{/if}
+	#{else}
+		#{ifnot pageTitle.equals("eWall")}
+			<a href = @{Application.index()}>Home</a>
 		#{/ifnot}
 		#{else}
 			<activeLink>Home</activeLink>
 		#{/else}
-	#{/if}
-	#{else}
-		
 	#{/else}
 </nav>
 
