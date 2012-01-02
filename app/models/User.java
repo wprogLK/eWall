@@ -23,10 +23,16 @@ import play.db.jpa.Model;
 @Entity
 public class User extends Model implements IModel
 {
+	
+	//USER
 	private String username;
 	private String password;
 	
 	private int indexOfCurrentWall = -1;
+	
+	//SETTINGS
+	private boolean fixHeader;
+	private boolean fixFooter;
 	
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
 	private List<Wall> walls;
@@ -40,7 +46,7 @@ public class User extends Model implements IModel
 		
 		Wall wall = new Wall("defaultWall",this);
 		this.walls.add(wall);
-	
+		
 		this.saveAll();
 	}
 	
@@ -113,7 +119,26 @@ public class User extends Model implements IModel
 		return this.password;
 	}
 	
+	//SETTINGS:
+	public boolean getFixHeader()
+	{
+		return fixHeader;
+	}
 	
+	public boolean getFixFooter()
+	{
+		return fixFooter;
+	}
 	
-
+	public void setFixHeader(boolean value)
+	{
+		this.fixHeader = value;
+		this.saveAll();
+	}
+	
+	public void setFixFooter(boolean value)
+	{
+		this.fixFooter = value;
+		this.saveAll();
+	}
 }

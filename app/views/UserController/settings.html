@@ -1,0 +1,17 @@
+#{extends 'main.html'/}
+#{set title:'Home' /}
+#{set pageTitle: 'eWall - Settings' /}
+#{if currentUser}
+	#{form @UserController.changeSettings()}
+		View:
+		</br>
+		<label for="HeaderFix">HeaderFix</label>
+		<input type="checkbox" name = "headerFix" #{if currentUser.getFixHeader()} checked #{/ if}/>
+		
+		<label for="FooterFix">FooterFix</label>
+		<input type="checkbox" name = "footerFix" #{if currentUser.getFixFooter()} checked #{/ if}/>
+		
+		</br>
+		<input type="submit" id="signin" name="login" value="Change settings"/>
+	#{/form}
+#{/if}

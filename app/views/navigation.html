@@ -2,7 +2,6 @@
 
 <nav id = "mainNavigation"> 	
 
-	
 	#{if currentUser}
 		#{ifnot pageTitle.equals("eWall")}
 			<a href = @{Application.index()}>MainWall</a>
@@ -12,10 +11,17 @@
 		#{/else}
 	
 		#{ifnot pageTitle.equals("eWall - Home User")}
-			<a href = @{UserController.home()}>Profile</a>
+			<a href = @{UserController.profile()}>Profile</a>
 		#{/ifnot}
 		#{else}
 			<activeLink>Profile</activeLink>
+		#{/else}
+		
+		#{ifnot pageTitle.equals("eWall - Settings")}
+			<a href = @{UserController.settings()}>Settings</a>
+		#{/ifnot}
+		#{else}
+			<activeLink>Settings</activeLink>
 		#{/else}
 	#{/if}
 	#{else}
@@ -26,5 +32,6 @@
 			<activeLink>Home</activeLink>
 		#{/else}
 	#{/else}
+
 </nav>
 

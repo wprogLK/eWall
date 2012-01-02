@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 
 <html>
-
+	*{VISUAL SETTINGS:}*
+	
+	#{if currentUser}
+		#{if currentUser.getFixHeader()}
+			#{stylesheet 'main/mainHeaderFix.css' /}
+		#{/ if}
+		
+		#{if currentUser.getFixFooter()}
+			#{stylesheet 'main/mainFooterFix.css' /}
+		#{/ if}
+	#{/ if}
+			
+	*{NORMAL THINGS:}*
+	
     <header>
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
