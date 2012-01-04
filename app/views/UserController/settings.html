@@ -2,8 +2,8 @@
 #{set title:'Home' /}
 #{set pageTitle: 'eWall - Settings' /}
 #{if currentUser}
+	View:
 	#{form @UserController.changeSettings()}
-		View:
 		</br>
 		<label for="HeaderFix">HeaderFix</label>
 		<input type="checkbox" name = "headerFix" #{if currentUser.getFixHeader()} checked #{/ if}/>
@@ -14,4 +14,43 @@
 		</br>
 		<input type="submit" id="signin" name="login" value="Change settings"/>
 	#{/form}
+	
+	
+	<hr>
+	Wall:
+	#{form @UserController.createNewWall()}
+		Create new wall:
+		
+		</br>
+		<label for="wallName">WallName</label>
+		<input type="textbox" name = "wallName"/>
+		</br>
+		<input type="submit" id="signin" name="createNewWall" value="create the new wall"/>
+		
+	#{/form}
+	
+	#{form @UserController.deleteWall()}
+		Delete wall:
+		<label for="wallToDelete">WallName</label>
+		<select name="wallToDelete">
+			#{list items:walls, as:'wall'}
+		      <option value = {$wall.getName()}>${wall.getName()}</option>
+			#{/list}
+		</select>
+	
+	
+	
+		</br>
+		
+		</br>
+		<input type="submit" id="deleteWall" name="deleteWall" value="Delete wall"/>
+	#{/form}
+	
+	</br>
+	YOUR WALLS:
+	#{list items:walls, as:'wall'}
+   		 <li>${wall.getName()}</li>
+	#{/list}
+	
+	
 #{/if}

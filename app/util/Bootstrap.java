@@ -1,5 +1,6 @@
 package util;
 
+import play.i18n.Lang;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import models.*;
@@ -16,6 +17,6 @@ public class Bootstrap extends Job
 		Wall wall = user.getWall(0);
 		wall.addMedia(text);
 		wall.addMedia(text2);
-		user.createWall("MyWall");
+		new Wall("MyWall",user);
 	}
 }

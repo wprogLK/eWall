@@ -32,7 +32,7 @@ public class UserTest extends UnitTest{
 	{
 		User user = new User("tester","123");
 		
-		Wall wallDirect = user.createWall("MyWall");
+		Wall wallDirect = new Wall("MyWall",user);
 		Wall wallIndirect = Wall.find("byName", "MyWall").first();
 		
 		assertEquals(wallDirect,wallIndirect);

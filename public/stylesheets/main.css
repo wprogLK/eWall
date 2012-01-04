@@ -3,17 +3,11 @@ activeLink
 	color: black;
 }
 
-/*
+
 footer
 {
 	background-color: white;
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	right: 0px:
-	text-align: right;
 }
-*/
 
 hr#footerHr
 {
@@ -21,21 +15,10 @@ hr#footerHr
 	width: 10000px;		/*TODO: make it better*/
 }
 
-/*
-body
-{
-	padding-top: 8em;
-	padding-bottom:3em;
-}
 
 header
-{
-	position: fixed;
-	top:0px;
-	left: 0px;
-	right: 0px;	
+{	
 	background-color: white;
-	padding: 10px;
 }
-*/
+
 

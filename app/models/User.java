@@ -19,6 +19,7 @@ import play.data.validation.CheckWith;
 import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.db.jpa.Model;
+import util.UnknownWallException;
 
 @Entity
 public class User extends Model implements IModel
@@ -66,6 +67,34 @@ public class User extends Model implements IModel
 		return this.walls.get(index);
 	}
 	
+	public Wall getWall(String wallName) throws UnknownWallException
+	{
+		Wall wallToFind = null;
+		
+		for(Wall wall:this.walls)
+		{
+			if(wall.getName().equals(wallName))
+			{
+				wallToFind = wall;
+				
+				break;
+			}
+		}
+		
+		return wallToFind;
+		
+	}
+	
+	public void deleteWall(String wallName) throws UnknownWallException
+	{
+		Wall wallToDelete = this.getWall(wallName);
+		
+		this.walls.remove(wallToDelete);
+		wallToDelete.delete();
+		
+		this.saveAll();
+	}
+	
 	public boolean hasNext()
 	{
 		return (this.walls.size()-1==this.indexOfCurrentWall);
@@ -82,7 +111,7 @@ public class User extends Model implements IModel
 		if(this.hasNext())
 		{
 			this.indexOfCurrentWall = 0;
-			//TODO Maybem throw a "message"
+			//TODO Maybe throw a "message"
 		}
 		else
 		{
@@ -94,13 +123,6 @@ public class User extends Model implements IModel
 	{
 		this.walls.add(wallToAdd);
 		this.saveAll();
-	}
-	
-	public Wall createWall(String wallName)
-	{
-		Wall wall = new Wall(wallName,this);
-		this.addWall(wall);
-		return wall;
 	}
 	
 	@Override
@@ -140,5 +162,10 @@ public class User extends Model implements IModel
 	{
 		this.fixFooter = value;
 		this.saveAll();
+	}
+	
+	public List<Wall> getWalls()
+	{
+		return this.walls;
 	}
 }

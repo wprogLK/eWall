@@ -26,6 +26,7 @@ public class Wall extends Media
 		
 		this.name = name;
 		this.owner = owner;
+		this.owner.addWall(this);
 		
 		this.medias = new ArrayList<Media>();
 	}
@@ -97,4 +98,5 @@ public class Wall extends Media
 		//TODO
 		return this.medias.get(0);
 	}
+	
 }
