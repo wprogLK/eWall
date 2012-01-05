@@ -29,22 +29,24 @@
 		
 	#{/form}
 	
+	#{if walls}
 	#{form @UserController.deleteWall()}
 		Delete wall:
 		<label for="wallToDelete">WallName</label>
-		<select name="wallToDelete">
-			#{list items:walls, as:'wall'}
-		      <option value = {$wall.getName()}>${wall.getName()}</option>
-			#{/list}
-		</select>
-	
-	
-	
-		</br>
 		
+		#{select 'wallToDelete', value:1, id:'wallToDelete'}
+			#{list items:walls, as:'wall'}	
+				 #{option value=wall.getName()} ${wall.getName()}#{/option}
+			#{/list}
+		#{/select}
+	
 		</br>
 		<input type="submit" id="deleteWall" name="deleteWall" value="Delete wall"/>
 	#{/form}
+	#{/if}
+	#{else}
+		Sorry but don't have any walls!
+	#{/else}
 	
 	</br>
 	YOUR WALLS:
@@ -54,3 +56,77 @@
 	
 	
 #{/if}
+
+</br>
+	a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>
+		a
+	</br>

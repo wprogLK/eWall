@@ -1,0 +1,16 @@
+body
+{
+	padding-top: 8em;
+}
+
+header
+{
+	background-color: red;
+	position: fixed;
+	top:0px;
+	left: 0px;
+	right: 0px;	
+	background-color: white;
+	padding: 10px;
+}
+
