@@ -1,0 +1,33 @@
+#{extends 'main.html'/}
+#{set title:'Home' /}
+#{set pageTitle: 'eWall - myWalls' /}
+#{if currentUser}
+	<hr>
+		<a href = @{UserController.getNextWall()}> nextWall </a>
+		The index is: ${indexOfWall}
+	<hr>
+	
+	#{ifErrors}
+		#{set errorFound: 'da' /}
+		<td>
+			#{myErrors errors:errors, searchKey:'noWall' /}
+		</td>
+		
+		#{if specificErrorFound.equals("true")}
+			DA IST DER FEHLER
+		#{/if}
+		#{else}
+			Kein FEHLER ${errors}
+		#{/else}
+		 ERRORO: ${errorFound}
+		
+	#{/ifErrors}
+	*{
+	Your current wall is:
+	${currentUser.getCurrentWall().getName()}
+	
+	#{list items:currentUser.getCurrentWall().getAll(), as:'media'}
+		<li>${media}</li>
+	#{/list}
+	}*
+#{/if}

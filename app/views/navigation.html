@@ -7,6 +7,14 @@
 		#{else}
 			<activeLink>MainWall</activeLink>
 		#{/else}
+		
+		#{ifnot pageTitle.equals("eWall - myWalls")}
+			<a href = @{UserController.myWalls()}>myWalls</a>
+		#{/ifnot}
+		#{else}
+			<activeLink>myWalls</activeLink>
+		#{/else}
+		
 	
 		#{ifnot pageTitle.equals("eWall - Home User")}
 			<a href = @{UserController.profile()}>Profile</a>

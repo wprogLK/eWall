@@ -68,4 +68,51 @@ public class UserController extends Controller
 		
 		settings();
 	}
+	
+	public static void myWalls()
+	{
+		String username = Secure.Security.connected();
+		User currentUser = User.find("byUsername", username).first();
+		
+		int indexOfWall = currentUser.getIndex();
+		Validation.addError("noWalls","user.noWalls");
+		if(validation.hasErrors())
+		{
+			params.flash(); 
+	        validation.keep();
+		}
+		
+		render(currentUser, indexOfWall);
+	}
+	
+	public static void getNextWall()
+	{
+		String username = Secure.Security.connected();
+		User currentUser = User.find("byUsername", username).first();
+		
+		currentUser.nextWall();
+		
+		myWalls();
+	}
+	
+	public static void createATweet(String message)
+	{
+		String username = Secure.Security.connected();
+		User currentUser = User.find("byUsername", username).first();
+		
+		currentUser.createTweet(message);
+		
+		myWalls();
+	}
+	
+	public static void getHomeTimeline()
+	{
+		String username = Secure.Security.connected();
+		User currentUser = User.find("byUsername", username).first();
+		
+		
+		currentUser.getHomeTimline();
+		
+		myWalls();
+	}
 }

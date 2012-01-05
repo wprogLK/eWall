@@ -30,103 +30,35 @@
 	#{/form}
 	
 	#{if walls}
-	#{form @UserController.deleteWall()}
-		Delete wall:
-		<label for="wallToDelete">WallName</label>
+		#{form @UserController.deleteWall()}
+			Delete wall:
+			<label for="wallToDelete">WallName</label>
+			
+			#{select 'wallToDelete', value:1, id:'wallToDelete'}
+				#{list items:walls, as:'wall'}	
+					 #{option value=wall.getName()} ${wall.getName()}#{/option}
+				#{/list}
+			#{/select}
 		
-		#{select 'wallToDelete', value:1, id:'wallToDelete'}
-			#{list items:walls, as:'wall'}	
-				 #{option value=wall.getName()} ${wall.getName()}#{/option}
-			#{/list}
-		#{/select}
-	
-		</br>
-		<input type="submit" id="deleteWall" name="deleteWall" value="Delete wall"/>
-	#{/form}
+			</br>
+			<input type="submit" id="deleteWall" name="deleteWall" value="Delete wall"/>
+		#{/form}
+		
+			YOUR WALLS:
+				#{list items:walls, as:'wall'}
+			   		 <li>${wall.getName()}</li>
+				#{/list}
 	#{/if}
 	#{else}
 		Sorry but don't have any walls!
+		
+		</br>
+		
 	#{/else}
 	
-	</br>
-	YOUR WALLS:
-	#{list items:walls, as:'wall'}
-   		 <li>${wall.getName()}</li>
-	#{/list}
+	<hr>
+	Twitter:
 	
-	
+	<br>
+	<a href = @{UserController.getHomeTimeline()}>Get your home timeline!</a>
 #{/if}
-
-</br>
-	a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>
-		a
-	</br>

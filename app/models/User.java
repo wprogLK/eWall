@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import controllers.Secure;
 import controllers.Secure.Security;
@@ -19,6 +20,15 @@ import play.data.validation.CheckWith;
 import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.db.jpa.Model;
+import twitter4j.ResponseList;
+import twitter4j.Status;
+import twitter4j.Tweet;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
+import util.TwitterUtil;
 import util.UnknownWallException;
 
 @Entity
@@ -29,7 +39,11 @@ public class User extends Model implements IModel
 	private String username;
 	private String password;
 	
-	private int indexOfCurrentWall = -1;
+	private int indexOfCurrentWall;
+	
+	//TWITTER
+	private String oAuthToken;
+	private String oAuthTokenSecret;
 	
 	//SETTINGS
 	private boolean fixHeader;
@@ -43,10 +57,15 @@ public class User extends Model implements IModel
 		this.username = username;
 		this.password = password;
 		
+		this.oAuthToken = "";
+		this.oAuthTokenSecret = "";
+		
 		this.walls = new ArrayList<Wall>();
 		
 		Wall wall = new Wall("defaultWall",this);
 		this.walls.add(wall);
+		
+		this.indexOfCurrentWall = 0;
 		
 		this.saveAll();
 	}
@@ -59,12 +78,29 @@ public class User extends Model implements IModel
 	public Wall nextWall()
 	{
 		this.nextIndexOfWall();
+		this.saveAll();
+		
 		return this.walls.get(this.indexOfCurrentWall);
+		
 	}
 	
 	public Wall getWall(int index)
 	{
-		return this.walls.get(index);
+		try
+		{
+			return this.walls.get(index);
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+//			if(this.walls.isEmpty())
+//			{
+//				Validation.addError("noWalls","user.noWalls");
+//			}
+		
+			return null;
+		}
+		
+		
 	}
 	
 	public Wall getWall(String wallName) throws UnknownWallException
@@ -82,7 +118,6 @@ public class User extends Model implements IModel
 		}
 		
 		return wallToFind;
-		
 	}
 	
 	public void deleteWall(String wallName) throws UnknownWallException
@@ -97,7 +132,7 @@ public class User extends Model implements IModel
 	
 	public boolean hasNext()
 	{
-		return (this.walls.size()-1==this.indexOfCurrentWall);
+		return ((this.walls.size()-1)!=this.indexOfCurrentWall);
 	}
 	
 	public List<Wall> getAll()
@@ -107,15 +142,14 @@ public class User extends Model implements IModel
 	
 
 	private void nextIndexOfWall()
-	{
+	{		
 		if(this.hasNext())
 		{
-			this.indexOfCurrentWall = 0;
-			//TODO Maybe throw a "message"
+			this.indexOfCurrentWall++;
 		}
 		else
 		{
-			this.indexOfCurrentWall++;
+			this.indexOfCurrentWall = 0;
 		}
 	}
 	
@@ -168,4 +202,62 @@ public class User extends Model implements IModel
 	{
 		return this.walls;
 	}
+	
+	public Wall getCurrentWall()	
+	{
+		if(this.indexOfCurrentWall > this.walls.size())
+		{
+			indexOfCurrentWall = 0;
+			this.saveAll();
+		}
+		
+		return this.getWall(indexOfCurrentWall);
+	}
+	
+	public int getIndex()
+	{
+		return this.indexOfCurrentWall;
+	}
+
+	public void setupTwitter(String oAuthToken, String oAuthTokenSecret) 
+	{
+		this.oAuthToken = oAuthToken;
+		this.oAuthTokenSecret = oAuthTokenSecret;
+		
+		this.saveAll();
+	}
+	
+
+	public void createTweet(String message)
+	{
+		Twitter twitter = TwitterUtil.setupTwitter(this.oAuthToken, this.oAuthTokenSecret);
+		
+		Status status = null;
+		try {
+			status = twitter.updateStatus("Test");
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    System.out.println("Successfully updated the status to [" + status.getText() + "].");
+	}
+	
+	public void getHomeTimline()
+	{
+		Twitter twitter = TwitterUtil.setupTwitter(this.oAuthToken, this.oAuthTokenSecret);
+		try {
+			ResponseList<Status> list = twitter.getUserTimeline(); //getHomeTimeline();
+			
+			System.out.println("STATUS'S:");
+			for(Status status:list)
+			{
+				System.out.println(status.getText());
+			}
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
+

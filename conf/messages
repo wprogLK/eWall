@@ -7,6 +7,8 @@
 security.authenticate.unknownUser = The user is unknown!
 security.authenticate.wrongPassword = Wrong password!
 
+user.noWall = You have no walls!
+
 security.register.usernameNotAllowed = The username %s is not allowed!
 security.register.usernameAlreadyExist = A user with the username %s already exist! Please choose another one!
 security.register.notMatchPassword = The passwords are not the same!

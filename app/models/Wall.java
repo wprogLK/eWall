@@ -8,12 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Wall extends Media
 {
 	private String name;
 	private int indexOfCurrentMedia = -1;
+
 	@ManyToOne
 	private User owner;
 
@@ -55,7 +57,7 @@ public class Wall extends Media
 	
 	public Media nextMedia()
 	{
-		this.nextIndexOfWall();
+		this.nextIndexOfMedia();
 		return this.medias.get(this.indexOfCurrentMedia);
 	}
 
@@ -69,7 +71,7 @@ public class Wall extends Media
 		return (this.medias.size()-1==this.indexOfCurrentMedia);
 	}
 	
-	private void nextIndexOfWall()
+	private void nextIndexOfMedia()
 	{
 		if(this.hasNext())
 		{
@@ -97,6 +99,18 @@ public class Wall extends Media
 	{
 		//TODO
 		return this.medias.get(0);
+	}
+	
+	public Media getCurrentMedia()	//TODO Test this!
+	{
+		if(indexOfCurrentMedia<0 || indexOfCurrentMedia>this.medias.size())
+		{
+			return this.nextMedia();
+		}
+		else
+		{
+			return this.getMedia(indexOfCurrentMedia);
+		}
 	}
 	
 }
