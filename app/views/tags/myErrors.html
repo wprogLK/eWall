@@ -1,7 +1,9 @@
 #{stylesheet 'myErrors.css' /}
 #{errors}
+	SearchKey: ${_searchKey}
+	errorKey: ${error.getKey()}
 	#{if error.getKey().equals(_searchKey)}
-	#{set specificErrorFound: 'true' /}
+	#{set errorFound: 'yes' /}
 		<error>${error.message()}</error>
 	#{/if}
 #{/errors}

@@ -75,7 +75,7 @@ public class UserController extends Controller
 		User currentUser = User.find("byUsername", username).first();
 		
 		int indexOfWall = currentUser.getIndex();
-		Validation.addError("noWalls","user.noWalls");
+		
 		if(validation.hasErrors())
 		{
 			params.flash(); 
