@@ -1,0 +1,24 @@
+#{extends 'main.html'/}
+#{set title:'Home' /}
+#{set pageTitle: 'eWall - myWalls' /}
+#{if currentUser}
+	<hr>
+		<a href = @{WallUserController.getNextWall()}> nextWall </a>
+		The index is: ${indexOfWall}
+	<hr>
+	
+	#{ifErrors}
+		<td>
+			#{myErrors errors:errors, searchKey:'noWalls' /}
+		</td>
+	#{/ifErrors}
+		
+	#{ifnot errorFounds}
+		Your current wall is:
+		${currentUser.getCurrentWall().getName()}
+		
+		#{list items:currentUser.getCurrentWall().getAll(), as:'media'}
+			<li>${media}</li>
+		#{/list}
+	#{/ifnot}
+#{/if}

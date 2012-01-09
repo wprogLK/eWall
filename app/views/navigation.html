@@ -2,14 +2,14 @@
 
 	#{if currentUser}
 		#{ifnot pageTitle.equals("eWall")}
-			<a href = @{Application.index()}>MainWall</a>
+			<a href = @{WallApplication.index()}>MainWall</a>
 		#{/ifnot}
 		#{else}
 			<activeLink>MainWall</activeLink>
 		#{/else}
 		
 		#{ifnot pageTitle.equals("eWall - myWalls")}
-			<a href = @{UserController.myWalls()}>myWalls</a>
+			<a href = @{WallUserController.myWalls()}>myWalls</a>
 		#{/ifnot}
 		#{else}
 			<activeLink>myWalls</activeLink>
@@ -17,14 +17,14 @@
 		
 	
 		#{ifnot pageTitle.equals("eWall - Home User")}
-			<a href = @{UserController.profile()}>Profile</a>
+			<a href = @{WallUserController.profile()}>Profile</a>
 		#{/ifnot}
 		#{else}
 			<activeLink>Profile</activeLink>
 		#{/else}
 		
 		#{ifnot pageTitle.equals("eWall - Settings")}
-			<a href = @{UserController.settings()}>Settings</a>
+			<a href = @{WallUserController.settings()}>Settings</a>
 		#{/ifnot}
 		#{else}
 			<activeLink>Settings</activeLink>
@@ -32,7 +32,7 @@
 	#{/if}
 	#{else}
 		#{ifnot pageTitle.equals("eWall")}
-			<a href = @{Application.index()}>Home</a>
+			<a href = @{WallApplication.index()}>Home</a>
 		#{/ifnot}
 		#{else}
 			<activeLink>Home</activeLink>

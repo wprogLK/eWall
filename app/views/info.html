@@ -5,12 +5,12 @@
 			
 		</td>
 		<td>
-			<a href="@{Security.logout()}">Logout</a>
+			<a href="@{WallSecurity.logout()}">Logout</a>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			#{include 'UserController/smallProfile.html' /}
+			#{include 'WallUserController/smallProfile.html' /}
 		</td>
 		<td>
 		
@@ -24,14 +24,14 @@
 	</td>
 		<td>
 			#{ifnot pageTitle.equals("Login")}
-				<a href=@{Security.login()}>Login</a>
+				<a href=@{WallSecurity.login()}>Login</a>
 			#{/ifnot}
 			#{else}
 				<activeLink>Login</activeLink>
 			#{/else}
 	
 			#{ifnot pageTitle.equals("Register")}
-				<a href=@{Security.register()}>Register</a>
+				<a href=@{WallSecurity.register()}>Register</a>
 			#{/ifnot}
 			#{else}
 				<activeLink>Register</activeLink>

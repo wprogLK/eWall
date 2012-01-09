@@ -1,0 +1,64 @@
+#{extends 'main.html'/}
+#{set title:'Home' /}
+#{set pageTitle: 'eWall - Settings' /}
+#{if currentUser}
+	View:
+	#{form @WallUserController.changeSettings()}
+		</br>
+		<label for="HeaderFix">HeaderFix</label>
+		<input type="checkbox" name = "headerFix" #{if currentUser.getFixHeader()} checked #{/ if}/>
+		
+		<label for="FooterFix">FooterFix</label>
+		<input type="checkbox" name = "footerFix" #{if currentUser.getFixFooter()} checked #{/ if}/>
+		
+		</br>
+		<input type="submit" id="signin" name="login" value="Change settings"/>
+	#{/form}
+	
+	
+	<hr>
+	Wall:
+	#{form @WallUserController.createNewWall()}
+		Create new wall:
+		
+		</br>
+		<label for="wallName">WallName</label>
+		<input type="textbox" name = "wallName"/>
+		</br>
+		<input type="submit" id="signin" name="createNewWall" value="create the new wall"/>
+		
+	#{/form}
+	
+	#{if walls}
+		#{form @WallUserController.deleteWall()}
+			Delete wall:
+			<label for="wallToDelete">WallName</label>
+			
+			#{select 'wallToDelete', value:1, id:'wallToDelete'}
+				#{list items:walls, as:'wall'}	
+					 #{option value=wall.getName()} ${wall.getName()}#{/option}
+				#{/list}
+			#{/select}
+		
+			</br>
+			<input type="submit" id="deleteWall" name="deleteWall" value="Delete wall"/>
+		#{/form}
+		
+			YOUR WALLS:
+				#{list items:walls, as:'wall'}
+			   		 <li>${wall.getName()}</li>
+				#{/list}
+	#{/if}
+	#{else}
+		Sorry but don't have any walls!
+		
+		</br>
+		
+	#{/else}
+	
+	<hr>
+	Twitter:
+	
+	<br>
+	<a href = @{WallUserController.getHomeTimeline()}>Get your home timeline!</a>
+#{/if}

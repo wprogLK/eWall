@@ -1,7 +1,7 @@
 import static org.junit.Assert.*;
 
-import models.User;
-import models.Wall;
+import models.WallUser;
+import models.WallWall;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,8 +21,8 @@ public class UserTest extends UnitTest{
 	@Test
 	public void simpleUserTest() 
 	{
-		User directUser = new User("tester","123");
-		User indirectUser = User.find("byUsername", "tester").first();
+		WallUser directUser = new WallUser("tester","123");
+		WallUser indirectUser = WallUser.find("byUsername", "tester").first();
 		
 		assertEquals(directUser,indirectUser);
 	}
@@ -30,10 +30,10 @@ public class UserTest extends UnitTest{
 	@Test
 	public void simpleCreateNewWall() 
 	{
-		User user = new User("tester","123");
+		WallUser user = new WallUser("tester","123");
 		
-		Wall wallDirect = new Wall("MyWall",user);
-		Wall wallIndirect = Wall.find("byName", "MyWall").first();
+		WallWall wallDirect = new WallWall("MyWall",user);
+		WallWall wallIndirect = WallWall.find("byName", "MyWall").first();
 		
 		assertEquals(wallDirect,wallIndirect);
 		assertEquals(wallIndirect.getOwner(), user);

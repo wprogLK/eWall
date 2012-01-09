@@ -1,9 +1,9 @@
 import static org.junit.Assert.*;
 
-import models.Media;
-import models.Text;
-import models.User;
-import models.Wall;
+import models.WallMedia;
+import models.WallText;
+import models.WallUser;
+import models.WallWall;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,14 +18,14 @@ public class WallTest extends UnitTest{
 	public void setUp()
 	{
 		Fixtures.deleteDatabase();
-		new User("tester","123");
+		new WallUser("tester","123");
 	}
 	
 	@Test
 	public void simpleWallTest() 
 	{	
-		User user = User.find("byUsername", "tester").first();
-		Wall wall = user.getWall(0);
+		WallUser user = WallUser.find("byUsername", "tester").first();
+		WallWall wall = user.getWall(0);
 		assertEquals(wall.getOwner(),user);
 		assertEquals(wall.getName(),"defaultWall");
 	}
@@ -33,15 +33,15 @@ public class WallTest extends UnitTest{
 	@Test
 	public void addMediaToWall() 
 	{	
-		User user = User.find("byUsername", "tester").first();
-		Wall wall = user.getWall(0);
+		WallUser user = WallUser.find("byUsername", "tester").first();
+		WallWall wall = user.getWall(0);
 		
-		Text text = new Text("TestText");
+		WallText text = new WallText("TestText");
 		
 		wall.addMedia(text);
 		
-		Media media = wall.getMedia();
-		Text text2 = Text.find("byTitle", "TestText").first();
+		WallMedia media = wall.getMedia();
+		WallText text2 = WallText.find("byTitle", "TestText").first();
 		
 		assertEquals(media,text2);
 		
