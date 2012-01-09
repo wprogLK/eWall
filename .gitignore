@@ -56,7 +56,7 @@ tmp/**/*
 # play!
 
 /logs
-/modules
+
 /test-result
 /tmp
 eclipse/*.launch
