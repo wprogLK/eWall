@@ -54,7 +54,7 @@ tmp/**/*
 *~.nib
 
 # play!
-/lib
+
 /logs
 /modules
 /test-result
