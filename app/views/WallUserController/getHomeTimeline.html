@@ -1,6 +1,33 @@
 #{extends 'main.html'/}
 #{set title:'Home' /}
 #{set pageTitle: 'eWall - myWalls' /}
+
+		#{extends 'main.html' /}
+		#{script 'jquery.reveal.js' /}
+		
+		<script type="text/javascript" charset="utf-8">
+		var showBigProfileAction = #{jsAction @bigProfile(':twitterUserID') /}
+		
+		$('a[modal-user-name]').live('click', function(e)
+		{
+				$('#modal p').load(showBigProfileAction({twitterUserID: $(this).attr('modal-user-name')}));
+		
+		});
+		
+		</script>
+		
+		<div id="modal" class="reveal-modal">
+			<p>
+			</p>
+		</div>
+		
+		<div id="results">
+		Results
+			<p>
+			</p>
+		</div>
+
+
 #{if currentUser}
 HOMETIMELINE
 	<hr>
@@ -9,8 +36,17 @@ HOMETIMELINE
 	<hr>
 	
 	TWEETS:
+	
+	
+	
 	#{list items:statusList, as:'tweet'}
-		<li>${tweet.getText()}</li>
+
+			
+				<li> 
+				#{smallUserProfileTwitter twitterUser:tweet.getUser() /}
+				
+				*{url: ${tweet.getUser().getProfileImageURL()}<p><img src=${tweet.getUser().getProfileImageURL()} alt="userPic"></p> }*
+				</li>
 	#{/list}
 	
 	#{ifErrors}

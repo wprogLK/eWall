@@ -1,0 +1,66 @@
+#{extends 'main.html'/}
+#{set title:'Home' /}
+#{set pageTitle: 'eWall - myWalls' /}
+#{if currentUser}
+HOMETIMELINE
+	<hr>
+		<a href = @{WallUserController.getNextWall()}> nextWall </a>
+		The index is: ${indexOfWall}
+	<hr>
+	
+	TWEETS:
+	
+	
+	
+	#{list items:statusList, as:'tweet'}
+		*{
+			<li>${tweet.getText()}</li>
+	
+		<li>
+		Annotation : ${tweet.getAnnotations()} 			</br>
+Contributors: ${tweet.getContributors()}		</br>
+createdAt: ${tweet.getCreatedAt()}			</br>
+geoLocation: ${tweet.getGeoLocation()}			</br>
+hastagEntities: ${tweet.getHashtagEntities()}		</br>
+id: ${tweet.getId()}					</br>
+inReplayToScreenName: ${tweet.getInReplyToScreenName()}	</br>
+inReplayToStatusId: ${tweet.getInReplyToStatusId()}	</br>
+inReplayToUserId: ${tweet.getInReplyToUserId()}		</br>
+mediaEntities: ${tweet.getMediaEntities()}		</br>
+place: ${tweet.getPlace()}				</br>
+rateLimitStatus: ${tweet.getRateLimitStatus()}		</br>
+retweetCount: ${tweet.getRetweetCount()}		</br>
+retweetStatus: ${tweet.getRetweetedStatus()}		</br>
+source: ${tweet.getSource()}				</br>
+urlEntities: ${tweet.getURLEntities()}			</br>
+user: ${tweet.getUser()}				</br>
+userMentionEntities: ${tweet.getUserMentionEntities()}	</br>
+favourit: ${tweet.isFavorited()}			</br>
+retweet: ${tweet.isRetweet()}				</br>
+retweetByMe: ${tweet.isRetweetedByMe()}			</br>
+truncated: ${tweet.isTruncated()}			</br>
+			</li>
+				}*
+			
+				<li> 
+				#{smallUserProfileTwitter twitterUser:tweet.getUser() /}
+				
+				*{url: ${tweet.getUser().getProfileImageURL()}<p><img src=${tweet.getUser().getProfileImageURL()} alt="userPic"></p> }*
+				</li>
+	#{/list}
+	
+	#{ifErrors}
+		<td>
+			#{myErrors errors:errors, searchKey:'noWalls' /}
+		</td>
+	#{/ifErrors}
+		
+	#{ifnot errorFounds}
+		Your current wall is:
+		${currentUser.getCurrentWall().getName()}
+		
+		#{list items:currentUser.getCurrentWall().getAll(), as:'media'}
+			<li>${media}</li>
+		#{/list}
+	#{/ifnot}
+#{/if}

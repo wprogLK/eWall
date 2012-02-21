@@ -13,6 +13,7 @@ import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+import twitter4j.User;
 import util.WallUnknownWallException;
 
 @With(Secure.class)
@@ -142,15 +143,52 @@ public class WallUserController extends Controller
 //		}
 		
 		Twitter twitter = currentUser.getTwitter();
+		
 		List<Status> statusList = twitter.getHomeTimeline();
-	
+		statusList.get(0).getAccessLevel();
+				statusList.get(0).getAnnotations();
+				statusList.get(0).getContributors();
+				statusList.get(0).getCreatedAt();
+				statusList.get(0).getGeoLocation();
+				statusList.get(0).getHashtagEntities();
+				statusList.get(0).getId();
+				statusList.get(0).getInReplyToScreenName();
+				statusList.get(0).getInReplyToStatusId();
+				statusList.get(0).getInReplyToUserId();
+				statusList.get(0).getMediaEntities();
+				statusList.get(0).getPlace();
+				statusList.get(0).getRateLimitStatus();
+				statusList.get(0).getRetweetCount();
+				statusList.get(0).getRetweetedStatus();
+				statusList.get(0).getSource();
+				statusList.get(0).getURLEntities();
+				statusList.get(0).getUser().getProfileImageURL();
+				statusList.get(0).getUserMentionEntities();
+				statusList.get(0).isFavorited();
+				statusList.get(0).isRetweet();
+				statusList.get(0).isRetweetedByMe();
+				statusList.get(0).isTruncated();
+			
 		int indexOfWall = currentUser.getIndex();
 		if(validation.hasErrors())
 		{
 			params.flash(); 
 	        validation.keep();
 		}
-		render(currentUser, indexOfWall, statusList);
 		
+		render(currentUser, indexOfWall, statusList);
+	}
+	
+	public static void bigProfile(long twitterUserID) throws TwitterException
+	{
+		System.out.println("ID is: " + twitterUserID);
+		String username = Secure.Security.connected();
+		WallUser currentUser = WallUser.find("byUsername", username).first();
+		Twitter twitter = currentUser.getTwitter();
+		
+		User twitterUser = twitter.showUser(twitterUserID);
+		
+		
+		render(twitterUser);
 	}
 }
