@@ -1,0 +1,30 @@
+#{extends 'main.html'/}
+#{set title:'Home' /}
+#{set pageTitle: 'eWall - myWalls' /}
+#{if currentUser}
+HOMETIMELINE
+	<hr>
+		<a href = @{WallUserController.getNextWall()}> nextWall </a>
+		The index is: ${indexOfWall}
+	<hr>
+	
+	TWEETS:
+	#{list items:statusList, as:'tweet'}
+		<li>${tweet.getText()}</li>
+	#{/list}
+	
+	#{ifErrors}
+		<td>
+			#{myErrors errors:errors, searchKey:'noWalls' /}
+		</td>
+	#{/ifErrors}
+		
+	#{ifnot errorFounds}
+		Your current wall is:
+		${currentUser.getCurrentWall().getName()}
+		
+		#{list items:currentUser.getCurrentWall().getAll(), as:'media'}
+			<li>${media}</li>
+		#{/list}
+	#{/ifnot}
+#{/if}

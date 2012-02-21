@@ -9,6 +9,10 @@ import models.WallWall;
 import play.data.validation.Validation;
 import play.mvc.Controller;
 import play.mvc.With;
+import twitter4j.ResponseList;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
 import util.WallUnknownWallException;
 
 @With(Secure.class)
@@ -105,14 +109,48 @@ public class WallUserController extends Controller
 		myWalls();
 	}
 	
-	public static void getHomeTimeline()
+	public static void getHomeTimeline() throws TwitterException
 	{
 		String username = Secure.Security.connected();
 		WallUser currentUser = WallUser.find("byUsername", username).first();
 		
 		
-		currentUser.getHomeTimline();
+		//currentUser.getHomeTimline();
 		
-		myWalls();
+//			ResponseList<Status> homeLine = currentUser.getHomeLine();
+		
+		//myWalls();
+		
+//		String username = Secure.Security.connected();
+//		WallUser currentUser = WallUser.find("byUsername", username).first();
+//		
+//		try {
+//			List<Status> statusList = currentUser.getHomeLine();
+//			
+//			int indexOfWall = currentUser.getIndex();
+//			
+//			if(validation.hasErrors())
+//			{
+//				params.flash(); 
+//		        validation.keep();
+//			}
+//			
+//			render(currentUser, indexOfWall, statusList);
+//		} catch (TwitterException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		Twitter twitter = currentUser.getTwitter();
+		List<Status> statusList = twitter.getHomeTimeline();
+	
+		int indexOfWall = currentUser.getIndex();
+		if(validation.hasErrors())
+		{
+			params.flash(); 
+	        validation.keep();
+		}
+		render(currentUser, indexOfWall, statusList);
+		
 	}
 }

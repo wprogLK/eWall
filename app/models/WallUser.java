@@ -3,6 +3,7 @@ package models;
 import interfaces.IWallModel;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -229,22 +230,37 @@ public class WallUser extends Model implements IWallModel
 	    System.out.println("Successfully updated the status to [" + status.getText() + "].");
 	}
 	
-	public void getHomeTimline()
+//	public void getHomeTimline()
+//	{
+//		Twitter twitter = WallTwitterUtil.setupTwitter(this.oAuthToken, this.oAuthTokenSecret);
+//		
+//		try {
+//			ResponseList<Status> list = twitter.getUserTimeline(); //getHomeTimeline();
+//			
+//			System.out.println("STATUS'S:");
+//			for(Status status:list)
+//			{
+//				System.out.println(status.getText());
+//			}
+//		} catch (TwitterException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	public ResponseList<Status> getHomeLine() throws TwitterException
+//	{
+//		Twitter twitter = WallTwitterUtil.setupTwitter(this.oAuthToken, this.oAuthTokenSecret);
+//		
+//		return twitter.getUserTimeline(); //getHomeTimeline();
+//	}
+	
+	public Twitter getTwitter()
 	{
-		Twitter twitter = WallTwitterUtil.setupTwitter(this.oAuthToken, this.oAuthTokenSecret);
-		try {
-			ResponseList<Status> list = twitter.getUserTimeline(); //getHomeTimeline();
-			
-			System.out.println("STATUS'S:");
-			for(Status status:list)
-			{
-				System.out.println(status.getText());
-			}
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return WallTwitterUtil.setupTwitter(this.oAuthToken, this.oAuthTokenSecret);
 	}
 	
-}
+	
+	
+	}
 
