@@ -1,33 +1,3 @@
 #{stylesheet 'smallUserProfileTwitter.css' /}
 
-*{
-#{extends 'main.html' /}
-#{script 'jquery.reveal.js' /}
-
-<script type="text/javascript" charset="utf-8">
-var showBigProfileAction = #{jsAction @bigProfile(':tUser') /}
-
-$('a[modal-user-name]').live('click', function(e)
-{
-		$('#modal p').load(showBigProfileAction({tUser: $(this).attr('modal-user-name')}));
-
-});
-
-</script>
-
-<div id="modal" class="reveal-modal">
-	<p>
-	</p>
-</div>
-
-<div id="results">
-Results
-	<p>
-	</p>
-</div>
-}*
-<img src=${_twitterUser.getProfileImageURL()} alt="userPic">
-
-<a href="#" modal-user-name="${_twitterUser.getId()}" data-reveal-id="modal">${_twitterUser.getName()}</a><br />
-ID: ${_twitterUser.getId()}
-
+<a href="#" modal-user-name="${_twitterUser.getId()}" data-reveal-id="modal"><img src=${_twitterUser.getProfileImageURL()} alt="userPic"></a><br />

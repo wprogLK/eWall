@@ -2,51 +2,34 @@
 #{set title:'Home' /}
 #{set pageTitle: 'eWall - myWalls' /}
 
-		#{extends 'main.html' /}
-		#{script 'jquery.reveal.js' /}
-		
-		<script type="text/javascript" charset="utf-8">
-		var showBigProfileAction = #{jsAction @bigProfile(':twitterUserID') /}
-		
-		$('a[modal-user-name]').live('click', function(e)
-		{
-				$('#modal p').load(showBigProfileAction({twitterUserID: $(this).attr('modal-user-name')}));
-		
-		});
-		
-		</script>
-		
-		<div id="modal" class="reveal-modal">
-			<p>
-			</p>
-		</div>
-		
-		<div id="results">
-		Results
-			<p>
-			</p>
-		</div>
+#{extends 'main.html' /}
+#{script 'jquery.reveal.js' /}
 
+<script type="text/javascript" charset="utf-8">
+var showBigProfileAction = #{jsAction @bigProfile(':twitterUserID') /}
+
+$('a[modal-user-name]').live('click', function(e)
+{
+	$('#modal p').load(showBigProfileAction({twitterUserID: $(this).attr('modal-user-name')}));
+});
+
+</script>
+
+<div id="modal" class="reveal-modal">
+	<p>
+	</p>
+</div>
 
 #{if currentUser}
-HOMETIMELINE
 	<hr>
 		<a href = @{WallUserController.getNextWall()}> nextWall </a>
 		The index is: ${indexOfWall}
 	<hr>
-	
-	TWEETS:
-	
-	
-	
-	#{list items:statusList, as:'tweet'}
 
-			
-				<li> 
-				#{smallUserProfileTwitter twitterUser:tweet.getUser() /}
-				
-				*{url: ${tweet.getUser().getProfileImageURL()}<p><img src=${tweet.getUser().getProfileImageURL()} alt="userPic"></p> }*
-				</li>
+	#{list items:statusList, as:'tweet'}
+		<li>
+			#{smallUserProfileTwitter twitterUser:tweet.getUser() /}
+		</li>
 	#{/list}
 	
 	#{ifErrors}
